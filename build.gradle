@@ -1,14 +1,12 @@
-apply plugin: 'java'
 
 plugins {
+    id 'java'
     id 'jacoco'
 }
 
 repositories {
     mavenCentral()
 }
-
-
 
 dependencies {
     testCompile 'junit:junit:4.12'
@@ -17,19 +15,4 @@ dependencies {
 
 test {
     outputs.upToDateWhen { false }
-        finalizedBy jacocoTestReport // report is always generated after tests run
-}
-
-jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-    reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
-    }
-}
-
-jacoco {
-    toolVersion = "0.8.7"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
 }
